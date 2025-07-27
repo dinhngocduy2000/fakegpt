@@ -14,13 +14,10 @@ import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Eye, EyeOff, MessageSquare } from "lucide-react";
-import { useRouter } from "next/navigation";
 import Link from "next/link";
-type Props = {};
 
-const LoginFormComponent = (props: Props) => {
+const LoginFormComponent = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   const [formData, setFormData] = useState({
     email: "",
@@ -31,7 +28,6 @@ const LoginFormComponent = (props: Props) => {
     setFormData((prev) => ({ ...prev, [name]: value }));
     if (error) setError("");
   };
-  const router = useRouter();
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-background to-muted p-4">
       <Card className="w-full max-w-md">
@@ -64,7 +60,6 @@ const LoginFormComponent = (props: Props) => {
                 value={formData.email}
                 onChange={handleInputChange}
                 required
-                disabled={isLoading}
               />
             </div>
 
@@ -79,7 +74,6 @@ const LoginFormComponent = (props: Props) => {
                   value={formData.password}
                   onChange={handleInputChange}
                   required
-                  disabled={isLoading}
                 />
                 <Button
                   type="button"
@@ -87,7 +81,6 @@ const LoginFormComponent = (props: Props) => {
                   size="icon"
                   className="absolute right-0 top-0 h-full px-3 py-2 hover:bg-transparent"
                   onClick={() => setShowPassword(!showPassword)}
-                  disabled={isLoading}
                 >
                   {showPassword ? (
                     <EyeOff className="h-4 w-4" />
@@ -117,8 +110,8 @@ const LoginFormComponent = (props: Props) => {
               </Link>
             </div>
 
-            <Button type="submit" className="w-full" disabled={isLoading}>
-              {isLoading ? "Signing in..." : "Sign in"}
+            <Button type="submit" className="w-full">
+              Sign in
             </Button>
           </form>
 
@@ -134,7 +127,7 @@ const LoginFormComponent = (props: Props) => {
           </div>
 
           <div className="grid grid-cols-2 gap-4">
-            <Button variant="outline" disabled={isLoading}>
+            <Button variant="outline">
               <svg className="mr-2 h-4 w-4" viewBox="0 0 24 24">
                 <path
                   d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
@@ -155,7 +148,7 @@ const LoginFormComponent = (props: Props) => {
               </svg>
               Google
             </Button>
-            <Button variant="outline" disabled={isLoading}>
+            <Button variant="outline">
               <svg
                 className="mr-2 h-4 w-4"
                 fill="currentColor"
@@ -170,7 +163,7 @@ const LoginFormComponent = (props: Props) => {
 
         <CardFooter>
           <p className="text-center text-sm text-muted-foreground w-full">
-            Don't have an account?{" "}
+            Don&apos;t have an account?{" "}
             <Link
               href="/auth/signup"
               className="text-primary hover:underline font-medium"
